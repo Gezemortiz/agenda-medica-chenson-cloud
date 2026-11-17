@@ -1,0 +1,22 @@
+{
+  "name": "agenda-medica-chenson-cloud",
+  "version": "1.0.0",
+  "description": "Aplicación web académica para gestionar citas médicas programadas en CHENSON.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js",
+    "seed": "node scripts/seed.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^8.12.1"
+  }
+}

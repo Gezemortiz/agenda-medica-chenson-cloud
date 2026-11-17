@@ -1,0 +1,14 @@
+<%- include('../partials/header') %>
+<section class="page-hero compact">
+  <div class="container"><span class="eyebrow">Nueva reservación</span><h1>Agendar cita médica</h1><p>Completa la información para reservar una consulta programada o de seguimiento.</p></div>
+</section>
+<section class="container content-section narrow">
+  <div class="emergency-mini"><strong>Urgencias:</strong> acude directamente al servicio médico; no necesitas registrarte aquí.</div>
+  <%- include('../partials/alertas') %>
+  <form action="/citas" method="POST" class="form-card">
+    <%- include('../partials/formulario') %>
+    <div class="form-actions"><a href="/" class="btn btn-secondary">Cancelar</a><button class="btn btn-primary" type="submit">Guardar cita</button></div>
+  </form>
+</section>
+<%- include('../partials/footer') %>
+

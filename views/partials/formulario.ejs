@@ -1,0 +1,58 @@
+<div class="form-grid">
+  <div class="field field-wide">
+    <label for="nombre">Nombre del empleado *</label>
+    <input id="nombre" name="nombre" type="text" maxlength="100" value="<%= cita.nombre || '' %>" autocomplete="name" required>
+  </div>
+  <div class="field">
+    <label for="codigoEmpleado">Código de empleado *</label>
+    <input id="codigoEmpleado" name="codigoEmpleado" type="text" maxlength="30" value="<%= cita.codigoEmpleado || '' %>" required>
+  </div>
+  <div class="field">
+    <label for="departamento">Departamento *</label>
+    <select id="departamento" name="departamento" required>
+      <option value="">Selecciona una opción</option>
+      <% DEPARTAMENTOS.forEach(item => { %>
+        <option value="<%= item %>" <%= cita.departamento === item ? 'selected' : '' %>><%= item %></option>
+      <% }) %>
+    </select>
+  </div>
+  <div class="field">
+    <label for="telefono">Teléfono a 10 dígitos *</label>
+    <input id="telefono" name="telefono" type="tel" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" value="<%= cita.telefono || '' %>" placeholder="3312345678" required>
+  </div>
+  <div class="field">
+    <label for="correo">Correo electrónico *</label>
+    <input id="correo" name="correo" type="email" maxlength="120" value="<%= cita.correo || '' %>" placeholder="empleado@ejemplo.com" required>
+  </div>
+  <div class="field">
+    <label for="fecha">Fecha *</label>
+    <input id="fecha" name="fecha" type="date" min="<%= minFecha %>" value="<%= cita.fecha || '' %>" required>
+    <small>Disponible de lunes a viernes.</small>
+  </div>
+  <div class="field">
+    <label for="hora">Horario *</label>
+    <select id="hora" name="hora" required>
+      <option value="">Selecciona una hora</option>
+      <% HORARIOS.forEach(item => { %>
+        <option value="<%= item %>" <%= cita.hora === item ? 'selected' : '' %>><%= item %> h</option>
+      <% }) %>
+    </select>
+    <small>El descanso de 10:30 a 11:00 está bloqueado.</small>
+  </div>
+  <div class="field field-wide">
+    <label for="motivo">Motivo general de la consulta *</label>
+    <textarea id="motivo" name="motivo" maxlength="180" rows="3" placeholder="Ejemplo: seguimiento de consulta" required><%= cita.motivo || '' %></textarea>
+    <small>No incluyas diagnósticos ni información clínica sensible.</small>
+  </div>
+  <% if (typeof ESTADOS !== 'undefined') { %>
+    <div class="field field-wide">
+      <label for="estado">Estado de la cita *</label>
+      <select id="estado" name="estado" required>
+        <% ESTADOS.forEach(item => { %>
+          <option value="<%= item %>" <%= cita.estado === item ? 'selected' : '' %>><%= item %></option>
+        <% }) %>
+      </select>
+    </div>
+  <% } %>
+</div>
+

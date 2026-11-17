@@ -1,0 +1,20 @@
+<%- include('../partials/header') %>
+<section class="page-hero"><div class="container page-title-row"><div><span class="eyebrow">Confirmación de reservación</span><h1>Detalle de la cita</h1><p>Folio <strong><%= cita.folio %></strong></p></div><span class="status status-<%= cita.estado.toLowerCase() %>"><%= cita.estado %></span></div></section>
+<section class="container content-section narrow">
+  <% if (mensaje === 'creada') { %><div class="alert alert-success">La cita fue registrada correctamente.</div><% } %>
+  <% if (mensaje === 'actualizada') { %><div class="alert alert-success">Los cambios se guardaron correctamente.</div><% } %>
+  <article class="detail-card">
+    <div class="appointment-date"><span><%= cita.hora %></span><div><strong><%= formatearFecha(cita.fecha) %></strong><small>Consulta médica programada</small></div></div>
+    <div class="detail-grid">
+      <div><small>Empleado</small><strong><%= cita.nombre %></strong></div><div><small>Código</small><strong><%= cita.codigoEmpleado %></strong></div>
+      <div><small>Departamento</small><strong><%= cita.departamento %></strong></div><div><small>Teléfono</small><strong><%= cita.telefono %></strong></div>
+      <div><small>Correo</small><strong><%= cita.correo %></strong></div><div><small>Motivo general</small><strong><%= cita.motivo %></strong></div>
+    </div>
+    <div class="detail-actions"><a href="<%= calendarUrl %>" target="_blank" rel="noopener noreferrer" class="btn btn-calendar">Agregar a Google Calendar ↗</a><a href="/citas/<%= cita._id %>/editar" class="btn btn-secondary">Editar o reprogramar</a></div>
+    <hr>
+    <div class="danger-zone"><div><strong>Eliminar reservación</strong><p>Esta acción quitará definitivamente la cita de la agenda.</p></div><form action="/citas/<%= cita._id %>?_method=DELETE" method="POST" data-confirm="¿Deseas eliminar definitivamente esta cita?"><button type="submit" class="btn btn-danger">Eliminar cita</button></form></div>
+  </article>
+  <div class="back-link"><a href="/citas">← Volver a la agenda</a></div>
+</section>
+<%- include('../partials/footer') %>
+

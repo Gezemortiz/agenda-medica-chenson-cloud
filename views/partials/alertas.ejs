@@ -1,0 +1,9 @@
+<% if (typeof errores !== 'undefined' && errores.length) { %>
+  <div class="alert alert-error" role="alert">
+    <strong>Revisa la información:</strong>
+    <ul>
+      <% errores.forEach(error => { %><li><%= error %></li><% }) %>
+    </ul>
+  </div>
+<% } %>
+

@@ -1,0 +1,22 @@
+<%- include('../partials/header') %>
+<section class="page-hero"><div class="container page-title-row"><div><span class="eyebrow">Consultas programadas</span><h1>Agenda de citas</h1><p>Consulta y administra las reservaciones del servicio médico.</p></div><a href="/citas/nueva" class="btn btn-primary">+ Agendar cita</a></div></section>
+<section class="container content-section">
+  <% if (typeof filtros.mensaje !== 'undefined' && filtros.mensaje === 'eliminada') { %><div class="alert alert-success">La cita fue eliminada correctamente.</div><% } %>
+  <form action="/citas" method="GET" class="filters-card">
+    <div class="field"><label for="fecha">Fecha</label><input type="date" id="fecha" name="fecha" value="<%= filtros.fecha || '' %>"></div>
+    <div class="field"><label for="departamento">Departamento</label><select id="departamento" name="departamento"><option value="">Todos</option><% DEPARTAMENTOS.forEach(item => { %><option value="<%= item %>" <%= filtros.departamento === item ? 'selected' : '' %>><%= item %></option><% }) %></select></div>
+    <div class="field"><label for="estado">Estado</label><select id="estado" name="estado"><option value="">Todos</option><% ESTADOS.forEach(item => { %><option value="<%= item %>" <%= filtros.estado === item ? 'selected' : '' %>><%= item %></option><% }) %></select></div>
+    <div class="filter-actions"><button class="btn btn-primary" type="submit">Filtrar</button><a href="/citas" class="btn btn-ghost">Limpiar</a></div>
+  </form>
+  <% if (!citas.length) { %>
+    <div class="empty-state"><div>＋</div><h2>No se encontraron citas</h2><p>Prueba con otros filtros o registra una cita nueva.</p><a href="/citas/nueva" class="btn btn-primary">Agendar cita</a></div>
+  <% } else { %>
+    <div class="table-card">
+      <table><thead><tr><th>Fecha y hora</th><th>Empleado</th><th>Departamento</th><th>Estado</th><th>Acciones</th></tr></thead><tbody>
+      <% citas.forEach(cita => { %><tr><td data-label="Fecha y hora"><strong><%= formatearFecha(cita.fecha) %></strong><br><span class="muted"><%= cita.hora %> h</span></td><td data-label="Empleado"><strong><%= cita.nombre %></strong><br><span class="muted"><%= cita.codigoEmpleado %></span></td><td data-label="Departamento"><%= cita.departamento %></td><td data-label="Estado"><span class="status status-<%= cita.estado.toLowerCase() %>"><%= cita.estado %></span></td><td data-label="Acciones" class="actions-cell"><a href="/citas/<%= cita._id %>" class="action-link">Ver</a><a href="/citas/<%= cita._id %>/editar" class="action-link">Editar</a></td></tr><% }) %>
+      </tbody></table>
+    </div>
+  <% } %>
+</section>
+<%- include('../partials/footer') %>
+
